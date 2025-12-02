@@ -6,6 +6,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from app.services.pdf_service import save_uploaded_file, extract_text_from_pdf
+from app.services.vector_service import create_vector_store
 from app.config import get_settings
 
 settings = get_settings()
@@ -22,6 +23,8 @@ class UploadResponse(BaseModel):
     num_pages: int
     text_preview: str # First 500 chars
     file_id: str # For tracking
+    num_chunks: int # number of chunks created
+    vector_store_ready: bool #RAG ready status
     
 @router.post("/pdf", response_model=UploadResponse)
 async def upload_pdf(
@@ -57,13 +60,21 @@ async def upload_pdf(
         # Generate file ID (use filename without extension for now)
         file_id = file.filename.replace('.pdf', '')
         
+        # Create vector store
+        vector_result = await create_vector_store(
+            text=extracted_data["full_text"],
+            file_id=file_id
+        )
+        
         return UploadResponse(
             success=True,
             message="PDF uploaded and processed successfully",
             filename=file.filename,
             num_pages=extracted_data["num_pages"],
             text_preview=extracted_data["full_text"][:500] + "...",
-            file_id=file_id
+            file_id=file_id,
+            num_chunks=vector_result["num_chunks"],
+            vector_store_ready=True
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")

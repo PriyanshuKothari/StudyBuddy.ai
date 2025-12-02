@@ -5,7 +5,7 @@ FastAPI application entry point
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
-from app.routers import chat, upload
+from app.routers import chat, upload, rag_chat
 
 settings = get_settings()
 
@@ -29,6 +29,7 @@ app.add_middleware(
 # Include routers
 app.include_router(chat.router)
 app.include_router(upload.router)
+app.include_router(rag_chat.router)
 
 # Root endpoints
 @app.get("/")
