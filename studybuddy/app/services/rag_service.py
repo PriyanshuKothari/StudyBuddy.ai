@@ -2,23 +2,30 @@
 """
 RAG Service - combines retrieval and generation
 """
-from typing import Dict
+from typing import Dict, Optional
 from app.services.vector_service import query_vector_store
 from app.services.llm_service import get_llm
+from app.services.session_service import get_conversation_context
 
-async def answer_with_rag(file_id: str, question: str) -> Dict:
+async def answer_with_rag(file_id: str, question: str, session_id: Optional[str] = None) -> Dict:
     """
     Answer question using RAG (Retrieval Augmented Generation)
-    
+
     Args:
         file_id: Document to search
-        question: User's question
+        question: User's question   
         
     Returns:
         Dictionary with answer and sources
     """
     try:
-        # Step 1: Retrieve relevant chunks from vector store
+        # Step 1: Get conversation history if session_id provided
+        conversation_context=""
+        if session_id:
+            conversation_context = get_conversation_context(session_id, max_messages=4)
+        
+        
+        # Step 2: Retrieve relevant chunks from vector store
         relevant_chunks = await query_vector_store(file_id, question, k=3)
         
         if not relevant_chunks:
@@ -28,30 +35,39 @@ async def answer_with_rag(file_id: str, question: str) -> Dict:
                 "context_used": 0
             }
         
-        # Step 2: Build context from retrieved chunks
+        # Step 3: Build context from retrieved chunks
         context= "\n\n".join([
             f"[Chunk {chunk['metadata']['chunk']}]: {chunk['content']}"
             for chunk in relevant_chunks
         ])
         
-        # Step 3: Create prompt with context
-        prompt = f"""You are StudyBuddy, an AI tutor helping students understand their study materials.
+        # Step 4: Create prompt with context
+        prompt_parts = ["You are StudyBuddy, an AI tutor helping students understand their study materials."]
+        
+        # Add conversation history if available
+        if conversation_context:
+            prompt_parts.append(f"\nPREVIOUS CONVERSATION:\n{conversation_context}\n")
+        
+        prompt_parts.append(f"""
+        Use the following context from the student's document to answer their question. 
+        If they're asking a follow-up question, consider the previous conversation.
+        If the answer is not in the context, say so.
 
-        Use the following context from the student's document to answer their question. If the answer is not in the context, say so.
-
-        CONTEXT:
+        DOCUMENT CONTEXT:
         {context}
 
-        QUESTION: {question}
+        CURRENT QUESTION: {question}
 
-        ANSWER (be clear, concise, and helpful):"""
+        ANSWER (be clear, concise, and helpful):""")
         
-        # Step 4: Get answer from LLM
+        prompt = "\n".join(prompt_parts)
+        
+        # Step 5: Get answer from LLM
         llm = get_llm()
         response = llm.invoke(prompt)
         answer = response.content
         
-        # Step 5: Return answer with sources
+        # Step 6: Return answer with sources
         return {
             "answer": answer,
             "sources": [
