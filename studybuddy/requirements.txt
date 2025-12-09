@@ -1,27 +1,26 @@
-# Web Framework (CORE - Always needed)
+# Web Framework 
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 python-multipart==0.0.9
 
-# Data Validation (CORE)
+# Data Validation 
 pydantic==2.5.0
 pydantic-settings==2.1.0
 
-# Utilities (CORE)
+# Utilities 
 python-dotenv==1.0.0
 
 # PDF Processing
 pypdf==3.17.4
 
-# Testing (Optional - comment out for now)
-# pytest==7.4.4
-# httpx==0.26.0
+# Vector Store & Embeddings
+chromadb==0.4.22
+sentence-transformers==2.3.1
 
-# langchain
-# langchain-community
-langchain-groq
-langchain_huggingface
-chromadb
-sentence_transformers
-langchain_chroma
-langchain-text-splitters
+# langchain & AI
+langchain==0.3.0
+langchain-core==1.1.0
+langchain-groq==1.1.0
+langchain-huggingface==1.0.0
+langchain-chroma==1.0.0
+langchain-text-splitters==0.3.0

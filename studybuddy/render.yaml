@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: studybuddy-backend
+    runtime: docker
+    plan: free
+    rootDir: studybuddy
+    dockerfilePath: studybuddy/Dockerfile
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: HF_TOKEN
+        sync: false
+    healthCheckPath: /health
