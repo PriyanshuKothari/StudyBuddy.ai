@@ -1,26 +1,26 @@
-# Web Framework 
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-python-multipart==0.0.9
+# Web Framework
+fastapi>=0.109.0,<0.120.0
+uvicorn[standard]>=0.27.0,<0.35.0
+python-multipart>=0.0.9
 
-# Data Validation 
-pydantic==2.5.0
-pydantic-settings==2.1.0
+# Data Validation
+pydantic>=2.5.0,<3.0.0
+pydantic-settings>=2.1.0,<3.0.0
 
-# Utilities 
-python-dotenv==1.0.0
-
-# PDF Processing
-pypdf==3.17.4
+# LangChain - Flexible versions
+langchain>=0.1.0,<0.4.0
+langchain-core>=0.1.0,<2.0.0
+langchain-groq>=0.1.0,<2.0.0
+langchain-huggingface>=0.0.1
+langchain-chroma>=0.1.0
+langchain-text-splitters>=0.0.1
 
 # Vector Store & Embeddings
-chromadb==0.4.22
-sentence-transformers==2.3.1
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
 
-# langchain & AI
-langchain==0.3.0
-langchain-core==1.1.0
-langchain-groq==1.1.0
-langchain-huggingface==1.0.0
-langchain-chroma==1.0.0
-langchain-text-splitters==0.3.0
+# PDF Processing
+pypdf>=3.17.0
+
+# Utilities
+python-dotenv>=1.0.0
