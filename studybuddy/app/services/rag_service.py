@@ -6,6 +6,7 @@ from typing import Dict, Optional
 from app.services.vector_service import query_vector_store
 from app.services.llm_service import get_llm
 from app.services.session_service import get_conversation_context
+from app.services.pinecone_vector_service import query_vector_store_pinecone
 
 async def answer_with_rag(file_id: str, question: str, session_id: Optional[str] = None) -> Dict:
     """
@@ -26,7 +27,7 @@ async def answer_with_rag(file_id: str, question: str, session_id: Optional[str]
         
         
         # Step 2: Retrieve relevant chunks from vector store
-        relevant_chunks = await query_vector_store(file_id, question, k=3)
+        relevant_chunks = await query_vector_store_pinecone(file_id, question, k=3)
         
         if not relevant_chunks:
              return {

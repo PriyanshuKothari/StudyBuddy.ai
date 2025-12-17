@@ -5,7 +5,8 @@ Upload router - handles PDF file uploads
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from pydantic import BaseModel
 from typing import Optional
-from app.services.pdf_service import save_uploaded_file, extract_text_from_pdf
+from app.services.pdf_service import save_uploaded_file, extract_text_from_pdf, delete_file
+from app.services.pinecone_vector_service import create_vector_store_pinecone
 from app.services.vector_service import create_vector_store
 from app.config import get_settings
 
@@ -27,9 +28,7 @@ class UploadResponse(BaseModel):
     vector_store_ready: bool #RAG ready status
     
 @router.post("/pdf", response_model=UploadResponse)
-async def upload_pdf(
-    file: UploadFile = File(..., description="PDF file to upload")
-):
+async def upload_pdf(file: UploadFile = File(..., description="PDF file to upload")):
     """
     Upload a PDF file for processing
     
@@ -61,10 +60,12 @@ async def upload_pdf(
         file_id = file.filename.replace('.pdf', '')
         
         # Create vector store
-        vector_result = await create_vector_store(
+        vector_result = await create_vector_store_pinecone(
             text=extracted_data["full_text"],
             file_id=file_id
         )
+        # DELETE PDF after processing (save disk space)
+        await delete_file(file_path)
         
         return UploadResponse(
             success=True,
@@ -78,3 +79,23 @@ async def upload_pdf(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")
+    
+@router.delete("/delete/{file_id}")
+async def delete_document(file_id: str):
+    """
+    Delete a document and its vectors (free up space)
+    """
+    from app.services.pinecone_vector_service import delete_file_vectors
+    
+    success = await delete_file_vectors(file_id)
+    
+    if success:
+        return {
+            "success": True,
+            "message": f"Document {file_id} deleted successfully"
+        }
+    else:
+        return {
+            "success": False,
+            "message": "Failed to delete document"
+        }

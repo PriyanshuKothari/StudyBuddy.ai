@@ -24,3 +24,7 @@ pypdf>=3.17.0
 
 # Utilities
 python-dotenv>=1.0.0
+
+# Pinecone
+pinecone-client>=2.2.0
+langchain-pinecone>=0.0.1

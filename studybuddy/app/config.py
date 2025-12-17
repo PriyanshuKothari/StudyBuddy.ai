@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     # API Keys - Optional for now (we'll add real ones later)
     GROQ_API_KEY: Optional[str] = None
     HF_TOKEN: Optional[str] = None
+    PINECONE_API_KEY: Optional[str] = None
+    PINECONE_ENVIRONMENT: str = "us-east-1"  
+    PINECONE_INDEX_NAME: str = "studybuddy"
     
     # App Config
     APP_NAME: str = "StudyBuddy.ai"
