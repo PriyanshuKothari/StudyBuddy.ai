@@ -1,3 +1,13 @@
+---
+title: StudyBuddy.ai
+emoji: 🎓
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🎓 StudyBuddy.ai
 
 > AI-powered study assistant that helps students learn through intelligent conversations with their own study materials.

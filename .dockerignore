@@ -1,0 +1,13 @@
+studybuddy/venv/
+studybuddy/__pycache__/
+studybuddy/uploads/
+studybuddy/chroma_db/
+studybuddy-frontend/
+.git/
+.gitignore
+*.md
+*.pdf
+*.pyc
+.env
+
+
