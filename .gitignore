@@ -37,3 +37,8 @@ node_modules/
 frontend/dist/
 frontend/.next/
 frontend/build/
+
+# ChromaDB files
+studybuddy/chroma_db/
+*.bin
+*.sqlite3

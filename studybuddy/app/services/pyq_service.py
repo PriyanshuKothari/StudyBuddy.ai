@@ -4,7 +4,7 @@ PYQ Service - Previous Year Question Paper Analysis
 from typing import List, Dict
 from collections import Counter
 import re
-from app.services.vector_service import query_vector_store
+from app.services.pinecone_vector_service import query_vector_store_pinecone
 from app.services.llm_service import get_llm
 
 # async def extract_questions_from_pyq(pyq_text: str) -> List[Dict]:
@@ -130,7 +130,7 @@ async def map_questions_to_topics(
     mapped_questions = []
     
     for question in questions:
-        relevant_chunks = await query_vector_store(
+        relevant_chunks = await query_vector_store_pinecone(
             file_id=syllabus_file_id,
             question=question["text"],
             k=2  
@@ -240,7 +240,7 @@ async def generate_mock_questions(
     """
     llm=get_llm()
     
-    relevant_chunks = await query_vector_store(
+    relevant_chunks = await query_vector_store_pinecone(
         file_id=syllabus_file_id,
         question=topic,
         k=2
