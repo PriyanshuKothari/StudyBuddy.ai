@@ -160,16 +160,16 @@ docker run -p 8000:8000 \
 - [x] Source attribution
 
 ### Phase 2: Advanced Features 🚧
-- [ ] PYQ analysis and topic frequency
-- [ ] Mock question generation
-- [ ] Study priority recommendations
-- [ ] Streaming responses
+- [x] PYQ analysis and topic frequency
+- [x] Mock question generation
+- [x] Study priority recommendations
+- [x] Streaming responses
 
 ### Phase 3: Full Stack 📅
-- [ ] React frontend with chat UI
-- [ ] User authentication
-- [ ] Multi-document support
-- [ ] Mobile app
+- [x] React frontend with chat UI
+- [x] User authentication
+- [x] Multi-document support
+- [x] Mobile app
 
 ---
 
