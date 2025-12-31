@@ -13,7 +13,7 @@ pinned: false
 > AI-powered study assistant that helps students learn through intelligent conversations with their own study materials.
 
 [![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)](./backend)
-[![Frontend](https://img.shields.io/badge/Frontend-Coming%20Soon-blue)](./frontend)
+[![Frontend](https://img.shields.io/badge/Frontend-React-blue)](./frontend)
 [![Python](https://img.shields.io/badge/Python-3.12-blue)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
