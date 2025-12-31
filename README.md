@@ -20,7 +20,7 @@ pinned: false
 ## 🚀 Live Demo
 
 **Backend API:** https://studybuddy-ai-9hu3.onrender.com/docs  
-**Frontend:** Coming Soon!
+**Frontend:** (https://study-buddy-ai-liard.vercel.app/)
 
 ---
 
