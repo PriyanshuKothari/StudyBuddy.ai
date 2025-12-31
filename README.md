@@ -33,9 +33,14 @@ StudyBuddy.ai/
 │   ├── Dockerfile    # Container config
 │   └── README.md     # Backend docs
 │
-├── studybuddy-frontend/         # React UI (Coming Soon)
-│   └── ...
+├── studybuddy-frontend/         # React UI 
+│   └── node_modules/
+│   └── public/
+│   └── src/
+│   └── index.html
+│   └── package.json
 │
+└── Dockerfile
 └── README.md         # This file
 ```
 
