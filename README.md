@@ -43,7 +43,15 @@ StudyBuddy.ai/
 └── Dockerfile
 └── README.md         # This file
 ```
+---
 
+## RAG Pipeline
+```
+PDF → Text Extraction → Semantic Chunking → 
+HuggingFace Embeddings → Pinecone Vector Store →
+Similarity Search → Relevant Context → GPT-OSS 20B → 
+Grounded Answer + Sources
+```
 ---
 
 ## ✨ Features
@@ -206,6 +214,6 @@ MIT License - Free to use for learning and projects
 
 ## 🙏 Acknowledgments
 
-Built with: FastAPI, LangChain, Groq, ChromaDB, HuggingFace
+Built with: FastAPI, LangChain, Groq, Pinecone, HuggingFace
 
 Special thanks to the open-source community!
