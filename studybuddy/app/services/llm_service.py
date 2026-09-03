@@ -19,7 +19,7 @@ def get_llm():
     
     llm= ChatGroq(
         groq_api_key=settings.GROQ_API_KEY,
-        model_name="llama-3.1-8b-instant",
+        model_name="openai/gpt-oss-20b",
         temperature=0.7,
         max_tokens=1000
     )
