@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     
     #LLM Config
-    LLM_MODEL: str = "llama-3.1-8b-instant"
+    LLM_MODEL: str = "openai/gpt-oss-20b"
     EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
     TEMPERATURE: float = 0.7
     MAX_TOKENS: int = 500
