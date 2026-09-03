@@ -75,8 +75,8 @@ StudyBuddy.ai/
 
 ### Backend
 - **Framework:** FastAPI
-- **LLM:** Groq (Llama 3.1 8B)
-- **Vector DB:** ChromaDB
+- **LLM:** OpenAI GPT-OSS 20B via Groq
+- **Vector DB:** Pinecone
 - **Embeddings:** HuggingFace Transformers
 - **Orchestration:** LangChain
 - **PDF Processing:** PyPDF
